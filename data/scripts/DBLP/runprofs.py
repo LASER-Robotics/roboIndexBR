@@ -116,8 +116,10 @@ out3.close()
 
 # Removes profiles of authors that were not generated in this run (they left the
 # list or have no papers); without this the old page would stay online.
+# index.html is the author list itself, not a profile.
 for page in glob.glob("../../../authors/*.html"):
-    if os.path.basename(page)[:-len(".html")] not in generated_slugs:
+    slug = os.path.basename(page)[:-len(".html")]
+    if slug != "index" and slug not in generated_slugs:
         os.remove(page)
 
 if missing:

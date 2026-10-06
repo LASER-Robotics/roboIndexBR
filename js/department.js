@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------
-   RoboIndexBR — institution detail page (departments/<slug>.html)
+   RoboIndexBR — institution detail page (depts/<slug>.html)
    ---------------------------------------------------------------------------
    Reads `corebr_inst`, defined by rundepts.py in each generated page. Shows the
    institution's score in each research area and its faculty, from the same
@@ -11,7 +11,7 @@
 (function () {
   'use strict';
 
-  /* Pages live in departments/, one level below the site root. */
+  /* Pages live in depts/, one level below the site root. */
   var BASE = '../';
 
   var AREAS = {
@@ -197,7 +197,7 @@
         summary.textContent =
           profs.length + (profs.length === 1 ? ' author' : ' authors') + ' indexed. ';
         var more = document.createElement('a');
-        more.href = BASE + 'authors.html?q=' + encodeURIComponent(name);
+        more.href = BASE + 'authors/?q=' + encodeURIComponent(name);
         more.textContent = 'See in the authors list';
         summary.appendChild(more);
 

@@ -19,8 +19,8 @@ because the browser blocks some of the local requests the pages rely on.
 ## Pages
 
 - `index.html`: overview of the output by area.
-- `authors.html`: author search and list.
-- `depts.html`: department view.
+- `authors/index.html`: author search and list (served at `/authors/`).
+- `depts/index.html`: department view (served at `/depts/`).
 - `stats.html`: totals, papers per year and per area, computed in the browser from the CSVs.
 - `authors/`: individual profiles generated for the authors with available data.
 

@@ -1,8 +1,8 @@
 /* ---------------------------------------------------------------------------
-   RoboIndexBR — author list and search in authors.html
+   RoboIndexBR — author list and search in authors/index.html
    ---------------------------------------------------------------------------
    Local list of authors filtered by name/institution, linking to
-   authors/<slug> — the individual profiles.
+   <slug> (authors/<slug>) — the individual profiles.
    --------------------------------------------------------------------------- */
 
 (function () {
@@ -86,7 +86,7 @@
 
       if (hasPage) {
         item = document.createElement('a');
-        item.href = 'authors/' + nameToSlug(author.name);
+        item.href = nameToSlug(author.name);
       } else {
         /* Without an individual profile, avoids offering a link that would 404. */
         item = document.createElement('span');
@@ -159,9 +159,9 @@
     });
 
     $.when(
-      $.get('data/configs/profs/all-authors.csv'),
-      $.get('data/configs/profs/profs.csv'),
-      $.get('data/configs/profs/pages.csv')
+      $.get('../data/configs/profs/all-authors.csv'),
+      $.get('../data/configs/profs/profs.csv'),
+      $.get('../data/configs/profs/pages.csv')
     )
       .done(function (authors, profs, pages) {
         var institutions = {};

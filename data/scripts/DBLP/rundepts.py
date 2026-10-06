@@ -11,7 +11,7 @@ import unicodedata
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 os.chdir(SCRIPT_DIR)
 
-OUT_DIR = "../../../departments"
+OUT_DIR = "../../../depts"
 
 # Same rule as nameToSlug() in js/departments.js, which builds the links.
 def create_slug(name):
@@ -22,7 +22,7 @@ def create_slug(name):
         raise ValueError(f"Institution name does not produce a valid slug: {name!r}")
     return slug
 
-# Generates departments/<slug>.html (served as /departments/<slug>) from the template.
+# Generates depts/<slug>.html (served as /depts/<slug>) from the template.
 def create_page(inst_name, slug, template):
     # '<' is escaped so a name can never close the <script> block it is injected into.
     name_json = json.dumps(inst_name).replace("<", "\\u003c")
@@ -67,9 +67,10 @@ for inst in sorted(institutions):
     create_page(inst, slug, template)
 
 # Removes pages of institutions that are no longer in the data; without this the
-# old page would stay online.
+# old page would stay online. index.html is the department list, not an institution.
 for page in glob.glob(OUT_DIR + "/*.html"):
-    if os.path.basename(page)[:-len(".html")] not in generated_slugs:
+    slug = os.path.basename(page)[:-len(".html")]
+    if slug != "index" and slug not in generated_slugs:
         os.remove(page)
 
-print(f"{len(generated_slugs)} department page(s) written to departments/")
+print(f"{len(generated_slugs)} department page(s) written to depts/")

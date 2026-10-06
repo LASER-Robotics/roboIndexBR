@@ -158,7 +158,7 @@
   function buildRows(records) {
     var rows = Object.keys(records).map(function (key) {
       var record = records[key];
-      var link = '<a href="departments/' + nameToSlug(record.name) + '">' +
+      var link = '<a href="' + nameToSlug(record.name) + '">' +
         escapeHTML(record.name) + '</a>';
       return [{ html: link, order: record.name }, count(record.authors), count(record.papers)];
     });
@@ -207,9 +207,9 @@
     var requests = [];
 
     areas.forEach(function (area) {
-      requests.push(loadCSV('data/' + area + '-out-scores.csv'));
-      requests.push(loadCSV('data/' + area + '-out-profs-list.csv'));
-      requests.push(loadCSV('data/' + area + '-out-papers.csv'));
+      requests.push(loadCSV('../data/' + area + '-out-scores.csv'));
+      requests.push(loadCSV('../data/' + area + '-out-profs-list.csv'));
+      requests.push(loadCSV('../data/' + area + '-out-papers.csv'));
     });
 
     $.when.apply($, requests)

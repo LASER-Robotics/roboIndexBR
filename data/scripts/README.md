@@ -46,7 +46,7 @@ The scripts in `DBLP/` form the main data pipeline:
    python data/scripts/DBLP/rundepts.py
    ```
 
-   This reads the area score and faculty files, writes `departments/<slug>.html`
+   This reads the area score and faculty files, writes `depts/<slug>.html`
    from `utils/_department_page.html` and removes pages of institutions that left
    the data.
 
