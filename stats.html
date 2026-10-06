@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoboIndexBR — Statistics</title>
+    <meta name="description" content="Totals and papers per year and per area indexed by RoboIndexBR.">
+    <link rel="canonical" href="stats.html">
+
+    <link rel="icon" href="images/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="images/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="images/site.webmanifest">
+
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="style/dashboard-theme.css">
+</head>
+
+<body>
+
+    <header class="rbr-header">
+        <div class="rbr-header__inner">
+            <a class="rbr-brand" href="index.html">RoboIndexBR <span>LASER · UFPB</span></a>
+            <nav aria-label="Main navigation">
+                <ul class="rbr-header-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="authors.html">Authors</a></li>
+                    <li><a href="depts.html">Departments</a></li>
+                    <li><a href="stats.html" aria-current="page">Statistics</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="rbr-main">
+        <div class="container-lg">
+
+            <nav class="rbr-breadcrumb" aria-label="You are here">
+                <a href="index.html">Home</a>
+                <span class="rbr-breadcrumb__sep">/</span>
+                <span class="rbr-breadcrumb__current">Statistics</span>
+            </nav>
+
+            <h1 class="rbr-page-title">Statistics</h1>
+            <p class="rbr-text">
+                Totals computed from the papers of Brazilian faculty indexed by RoboIndexBR.
+                Papers that appear in more than one area are counted once in the totals and in the per-year charts.
+            </p>
+
+            <div class="rbr-search">
+                <label class="rbr-search__label" for="area-select">Research area</label>
+                <select class="rbr-select" id="area-select" data-area-select>
+                    <option value="all">All areas</option>
+                    <option value="robotics">Robotics (general)</option>
+                    <option value="cs">Computer Science</option>
+                    <option value="control">Electrical and Control Systems</option>
+                    <option value="mech">Mechanical Design and Mechatronics</option>
+                </select>
+            </div>
+
+            <div id="stats-content" class="rbr-chart rbr-chart--table"></div>
+
+        </div>
+    </main>
+
+    <footer class="rbr-footer">
+        <p>
+            RoboIndexBR — LASER, Federal University of Paraíba. Data obtained from
+            <a href="https://dblp.org" target="_blank" rel="noopener">DBLP</a>.
+        </p>
+    </footer>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/jquery.csv.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/stats.js"></script>
+</body>
+
+</html>

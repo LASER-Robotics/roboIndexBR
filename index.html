@@ -1,151 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoboIndexBR — Home</title>
+    <meta name="description"
+        content="Data on Brazilian scientific output in robotics, indexed from DBLP. LASER/UFPB.">
 
-    <!-- favcon -->
-        <!-- Favicon principal -->
-        <link rel="icon" href="images/" type="image/x-icon">
+    <link rel="icon" href="images/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="images/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="images/site.webmanifest">
 
-        <!-- Favicon para diferentes tamanhos e dispositivos -->
-        <link rel="icon" href="images/favicon-16x16.png" sizes="16x16" type="image/png">
-        <link rel="icon" href="images/favicon-32x32.png" sizes="32x32" type="image/png">
-        <link rel="icon" href="images/android-chrome-192x192.png" sizes="192x192" type="image/png">
-        <link rel="icon" href="images/android-chrome-512x512.png" sizes="512x512" type="image/png">
-
-        <!-- Apple Touch Icon (para dispositivos Apple) -->
-        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-
-    <!-- style -->
-
-    <link href="style/style.css" rel="stylesheet">
-    <link href="style/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Incluindo jQuery localmente -->
-    <script src="JS/jquery-3.4.1.min.js"></script> 
-    <script src="/src/charts/charts.html"></script>
-
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $("input[type=radio][name=research_area_btn]").click(function() {
-                // Pega o valor da área de pesquisa selecionada
-                var corebr_area_prefix = $("input[type=radio][name=research_area_btn]:checked").val();
-                
-                // Armazena a área de pesquisa selecionada no sessionStorage
-                sessionStorage.setItem('corebr_area_prefix', corebr_area_prefix);
-                
-                // Recarrega o conteúdo do iframe
-                document.getElementById('charts-frame').contentWindow.location.reload(true);
-                
-                // Condicionais para carregar páginas diferentes dependendo da área de pesquisa
-                if (corebr_area_prefix === "mech" || 
-                    corebr_area_prefix === "control" ) {
-                    document.getElementById('charts-frame').contentWindow.location.replace("charts3.html");
-                } else if(corebr_area_prefix === "robotics" || corebr_area_prefix === "cs"){
-                    document.getElementById('charts-frame').contentWindow.location.replace("charts2.html");
-                } else {
-                    document.getElementById('charts-frame').contentWindow.location.replace("charts.html");
-            }
-            });
-        })
-    </script>
-
-    <script type="text/javascript">
-        sessionStorage.setItem('corebr_area_prefix', "robotics");
-    </script>
-
-
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="style/dashboard-theme.css">
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <a class="navbar-brand" href="index.html">RoboIndex <font size="1">BETA</font></a>
-
-            <!-- <a class="navbar-brand" href="index.html">
-                <img src="../images/logo-fundo.png" alt="RoboIndex" height="40">
-                <small class="text-muted" style="font-size: 0.6em;">BETA</small>
-            </a> -->
-
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="authors2.html">Faculty</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="depts2.html">Departments</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                    <a class="nav-link" href="statistics.html">Statistics</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="faq.html">FAQ</a>
-                    </li> -->
+    <header class="rbr-header">
+        <div class="rbr-header__inner">
+            <a class="rbr-brand" href="index.html">RoboIndexBR <span>LASER · UFPB</span></a>
+            <nav aria-label="Main navigation">
+                <ul class="rbr-header-nav">
+                    <li><a href="index.html" aria-current="page">Home</a></li>
+                    <li><a href="authors.html">Authors</a></li>
+                    <li><a href="depts.html">Departments</a></li>
+                    <li><a href="stats.html">Statistics</a></li>
                 </ul>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
-    
-    <div class="container">
 
-        <div class="row">
-            <div class="col-sm">
-                <p>
-                    RoboIndexBR is a system that provides transparent and meaningful data about Brazilian scientific production in the field of robotics.
-                    <b>We index full papers published in the last five years by Brazilian researchers in selected conferences and journals.</b>
-                    <!-- <br>
-                    The data is retrieved from the DBLP database, ensuring consistent and internationally recognized coverage.
-                    To report missing papers, missing authors, or other issues, please use this form.
-                    <br>
-                    The data is retrieved from the DBLP database, ensuring consistent and internationally recognized coverage.
-                    To report missing papers, missing authors, or other issues, please use this form. -->
-                </p>
+    <main class="rbr-main">
+        <div class="container-lg">
+
+            <p class="rbr-text">
+                RoboIndexBR gathers data on Brazilian scientific output in robotics.
+                <span class="rbr-highlight">We index full papers published by Brazilian researchers
+                    in selected conferences and journals</span>, over the period
+                <span data-window>2021–2026</span>. The data comes from DBLP.
+            </p>
+
+            <div class="rbr-metrics">
+                <div class="rbr-metric">
+                    <span class="rbr-metric__value" data-metric="authors">—</span>
+                    <span class="rbr-metric__label">Authors</span>
+                </div>
+                <div class="rbr-metric">
+                    <span class="rbr-metric__value" data-metric="departments">—</span>
+                    <span class="rbr-metric__label">Departments</span>
+                </div>
+                <div class="rbr-metric">
+                    <span class="rbr-metric__value" data-metric="papers">—</span>
+                    <span class="rbr-metric__label">Papers</span>
+                </div>
+                <div class="rbr-metric">
+                    <span class="rbr-metric__value" data-metric="period">—</span>
+                    <span class="rbr-metric__label">Period</span>
+                </div>
             </div>
+
+            <div class="rbr-panel">
+                <aside class="rbr-panel__aside">
+                    <div class="rbr-area-radios" data-area-radios>
+                        <p class="rbr-area-radios__label">Research area</p>
+                        <label class="rbr-area-opt">
+                            <input type="radio" name="area" value="cs" data-area="cs">
+                            <span>Computer Science</span>
+                        </label>
+                        <label class="rbr-area-opt">
+                            <input type="radio" name="area" value="control" data-area="control">
+                            <span>Electrical and Control Systems</span>
+                        </label>
+                        <label class="rbr-area-opt">
+                            <input type="radio" name="area" value="mech" data-area="mech">
+                            <span>Mechanical Design and Mechatronics</span>
+                        </label>
+                        <label class="rbr-area-opt">
+                            <input type="radio" name="area" value="robotics" data-area="robotics" checked>
+                            <span>Robotics (general)</span>
+                        </label>
+                    </div>
+
+                    <div class="rbr-area-select">
+                        <label class="rbr-area-select__label" for="rbr-area-select">Research area</label>
+                        <select id="rbr-area-select" data-area-select>
+                            <option value="cs">Computer Science</option>
+                            <option value="control">Electrical and Control Systems</option>
+                            <option value="mech">Mechanical Design and Mechatronics</option>
+                            <option value="robotics" selected>Robotics (general)</option>
+                        </select>
+                    </div>
+
+                    <nav class="rbr-nav" data-nav aria-label="Data panels"></nav>
+                </aside>
+
+                <div class="rbr-panel__content" data-panels></div>
+            </div>
+
         </div>
+    </main>
 
-        <div class="row">
-            <div class="col-sm-3" style="background-color:WhiteSmoke;">
+    <footer class="rbr-footer">
+        <p>
+            RoboIndexBR — LASER, Federal University of Paraíba. Data obtained from
+            <a href="https://dblp.org" target="_blank" rel="noopener">DBLP</a>.
+            Project derived from <a href="https://csindexbr.org" target="_blank" rel="noopener">CSIndexbr</a>.
+        </p>
+    </footer>
 
-                <div class="radio">
-                    <label><input type="radio" name="research_area_btn" value="cs"> Computer Science</label>
-                </div>
-
-                <div class="radio">
-                    <label><input type="radio" name="research_area_btn" value="control"> Electrical & Control Systems</label>
-                </div>
-
-                <div class="radio">
-                    <label><input type="radio" name="research_area_btn" value="mech"> Mechanical Design & Mechatronics</label>
-                </div>
-
-                <div class="radio">
-                    <label><input type="radio" name="research_area_btn" value="robotics"> Robotics (General)</label>
-                </div>
-                
-            </div>
-            
-            <div class="col-sm-9">
-                <iframe name="frame-results" id="charts-frame" height=600 width=820 src="charts2.html">
-                </iframe>
-            </div>
-
-        </div>
-    </div>
-
-    <script src="JS/popper.min.js"></script>
-    <script src="JS/bootstrap.min.js"></script>
-
-
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/jquery.csv.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/app.js"></script>
 </body>
+
 </html>

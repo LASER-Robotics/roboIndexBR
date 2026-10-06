@@ -1,0 +1,861 @@
+/* ---------------------------------------------------------------------------
+   RoboIndexBR — site theme (index.html)
+   ---------------------------------------------------------------------------
+   Own self-contained CSS (no component/font CDN — it just needs to open).
+   --------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+  --rbr-chart-height: 480px;
+
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --border: #dde2ea;
+  --table-stripe: #f3f5f8;
+  --text: #1f2733;
+  --text-muted: #5b6472;
+  --text-faint: #8891a0;
+  --accent: #1351b4;
+  --accent-dark: #0c3f8f;
+  --accent-tint: #e8f0fd;
+  --nav-active-bg: #1351b4;
+  --nav-active-text: #ffffff;
+  --nav-hover-bg: #eef2f8;
+  --bar: #1351b4;
+  --bar-track: #e4e9f1;
+  --danger: #b5292b;
+  --danger-tint: #fbe9e9;
+  --info-tint: #e8f0fd;
+  --shadow: 0 1px 2px rgba(20, 30, 50, 0.06), 0 8px 24px rgba(20, 30, 50, 0.05);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #10151f;
+  --surface: #171e2b;
+  --border: #2b3446;
+  --table-stripe: #1a2231;
+  --text: #e7ebf2;
+  --text-muted: #a3adc0;
+  --text-faint: #9aa6ba;
+  --accent: #5b9cff;
+  --accent-dark: #7fb0ff;
+  --accent-tint: #1b2a45;
+  --nav-active-bg: #2a4a86;
+  --nav-active-text: #ffffff;
+  --nav-hover-bg: #1f2838;
+  --bar: #5b9cff;
+  --bar-track: #2b3446;
+  --danger: #ff8a8c;
+  --danger-tint: #3a2028;
+  --info-tint: #1b2a45;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--bg);
+}
+
+a {
+  color: var(--accent);
+}
+
+/* --- Header and footer ---------------------------------------------------- */
+
+.rbr-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.rbr-header__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.rbr-brand {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  text-decoration: none;
+}
+
+.rbr-brand span {
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-inline-start: 10px;
+  font-size: 0.82rem;
+}
+
+.rbr-header-nav {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rbr-header-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding-block-end: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.rbr-header-nav a:hover {
+  color: var(--accent);
+}
+
+.rbr-header-nav a[aria-current='page'] {
+  color: var(--accent-dark);
+  border-bottom-color: var(--accent);
+}
+
+.rbr-header__inner > .rbr-theme-toggle {
+  flex: 0 0 auto;
+}
+
+.rbr-theme-toggle {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.rbr-theme-toggle:hover {
+  border-color: var(--border);
+  background: var(--nav-hover-bg);
+  color: var(--accent-dark);
+}
+
+.rbr-theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 37em) {
+  .rbr-header__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px 16px;
+  }
+
+  .rbr-header-nav {
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+
+  .rbr-header__inner > nav {
+    grid-column: 1 / -1;
+  }
+
+  .rbr-header__inner > .rbr-theme-toggle {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+.rbr-footer {
+  border-top: 1px solid var(--border);
+  margin-block-start: 48px;
+  padding: 24px;
+  text-align: center;
+}
+
+.rbr-footer p {
+  max-width: 68ch;
+  margin: 0 auto 6px;
+  font-size: 0.82rem;
+  color: var(--text-faint);
+}
+
+.rbr-footer a {
+  color: var(--text-muted);
+}
+
+/* --- Structure --------------------------------------------------------------- */
+
+.rbr-main {
+  padding-block: 28px;
+}
+
+.container-lg {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-inline: 24px;
+}
+
+.rbr-text {
+  margin: 0 0 20px;
+  max-width: 76ch;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.rbr-highlight {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* --- Key numbers ----------------------------------------------------------- */
+
+.rbr-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 12px;
+  margin-block: 20px 24px;
+}
+
+.rbr-metric {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.rbr-metric__value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  min-height: 1.1em;
+}
+
+.rbr-metric__label {
+  display: block;
+  margin-block-start: 4px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* --- Layout: side column + content --------------------------------------- */
+
+.rbr-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (min-width: 62em) {
+  .rbr-panel {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+
+  .rbr-panel__aside {
+    position: sticky;
+    top: 20px;
+  }
+}
+
+.rbr-panel__content {
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+/* --- Area selector ----------------------------------------------------------- */
+
+.rbr-area-radios,
+.rbr-area-select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.rbr-area-radios {
+  display: none;
+}
+
+.rbr-area-radios__label,
+.rbr-area-select__label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-faint);
+  margin: 0 0 8px;
+}
+
+.rbr-area-opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.rbr-area-opt:hover {
+  background: var(--nav-hover-bg);
+}
+
+.rbr-area-opt input {
+  accent-color: var(--accent);
+  margin: 0;
+}
+
+.rbr-area-opt:has(input:checked) {
+  background: var(--accent-tint);
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.rbr-area-select select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+@media (min-width: 62em) {
+  .rbr-area-radios {
+    display: block;
+  }
+
+  .rbr-area-select {
+    display: none;
+  }
+}
+
+/* --- Tab navigation menu (grouped) ------------------------------------ */
+
+.rbr-nav {
+  margin-block-start: 16px;
+}
+
+.rbr-nav__group + .rbr-nav__group {
+  margin-block-start: 16px;
+}
+
+.rbr-nav__group-label {
+  margin: 0 0 4px;
+  padding-inline-start: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+}
+
+.rbr-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rbr-nav__item {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 7px;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.88rem;
+  text-align: start;
+  cursor: pointer;
+}
+
+.rbr-nav__item:hover {
+  background: var(--nav-hover-bg);
+}
+
+.rbr-nav__item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.rbr-nav__item[aria-current='true'] {
+  background: var(--nav-active-bg);
+  color: var(--nav-active-text);
+  font-weight: 600;
+}
+
+/* --- Panels (one div per tab; only the active one is visible) ------------------------ */
+
+.rbr-panel-tab {
+  display: none;
+}
+
+.rbr-panel-tab--active {
+  display: block;
+}
+
+.rbr-panel-tab__title {
+  margin: 0 0 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.rbr-chart {
+  display: block;
+  width: 100%;
+  min-height: var(--rbr-chart-height);
+}
+
+.rbr-chart--table {
+  min-height: 0;
+  overflow-x: auto;
+}
+
+/* --- Bar chart (SVG generated in render.js) ------------------------------- */
+
+/* --- Statistics page sections -------------------------------------- */
+
+.rbr-stats-section {
+  margin-block-start: 32px;
+}
+
+.rbr-figure {
+  margin: 0;
+}
+
+.rbr-bars {
+  display: block;
+  max-width: 100%;
+}
+
+.rbr-bars__bar {
+  fill: var(--bar);
+}
+
+.rbr-bars__label {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  fill: var(--text);
+}
+
+.rbr-bars__value {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  fill: var(--text-muted);
+}
+
+.rbr-figure__caption {
+  max-width: 78ch;
+  margin-block-start: 16px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* --- Table --------------------------------------------------------------- */
+
+.rbr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.rbr-table th,
+.rbr-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.rbr-table thead th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+.rbr-table tbody tr:nth-child(even) {
+  background: var(--table-stripe);
+}
+
+.rbr-table tbody tr:hover {
+  background: var(--nav-hover-bg);
+}
+
+/* Stacked table (opt-in via opts.stacked): on a narrow screen each row becomes
+   a card, with the column name (data-label) next to the value. The header
+   disappears, and with it click-to-sort — so it is only used on short tables. */
+@media (max-width: 600px) {
+  .rbr-table--stacked thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .rbr-table--stacked,
+  .rbr-table--stacked tbody,
+  .rbr-table--stacked tr,
+  .rbr-table--stacked td {
+    display: block;
+  }
+
+  .rbr-table--stacked tr {
+    margin-block-end: 12px;
+    padding: 4px 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .rbr-table--stacked td {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 0;
+  }
+
+  .rbr-table--stacked td::before {
+    content: attr(data-label);
+    color: var(--text-muted);
+  }
+
+  .rbr-table--stacked td:first-child {
+    font-weight: 600;
+  }
+
+  .rbr-table--stacked td:first-child::before {
+    content: none;
+  }
+}
+
+.rbr-col-num {
+  width: 3.5rem;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.rbr-col-number {
+  font-variant-numeric: tabular-nums;
+}
+
+.rbr-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+.rbr-sort:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.rbr-sort:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+[data-sorted='asc'] .rbr-sort__arrow::after {
+  content: '\2191';
+}
+
+[data-sorted='desc'] .rbr-sort__arrow::after {
+  content: '\2193';
+}
+
+.rbr-badge {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.1em;
+}
+
+.rbr-external-link {
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* --- States: loading / empty / error --------------------------------------- */
+
+.rbr-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: var(--rbr-chart-height);
+  padding: 24px;
+  text-align: center;
+}
+
+.rbr-spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  animation: rbr-spin 0.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rbr-spinner {
+    animation-duration: 2.4s;
+  }
+}
+
+@keyframes rbr-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rbr-state__text {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.rbr-message {
+  max-width: 46rem;
+  padding: 14px 16px;
+  border-radius: 8px;
+  text-align: start;
+}
+
+.rbr-message--info {
+  background: var(--info-tint);
+}
+
+.rbr-message--danger {
+  background: var(--danger-tint);
+}
+
+/* Footnote of a panel (e.g. origin of hand-curated data). Deliberately
+   discreet: context for whoever wants it, without competing with the table. */
+.rbr-note {
+  max-width: 78ch;
+  margin: 16px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.rbr-message__title {
+  margin: 0 0 4px;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.rbr-message--danger .rbr-message__title {
+  color: var(--danger);
+}
+
+.rbr-message__body {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.rbr-btn {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.rbr-btn--secondary {
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.rbr-btn--secondary:hover {
+  background: var(--accent-tint);
+}
+
+/* --- Inner pages: title, breadcrumb, supporting text ----------------- */
+
+.rbr-page-title {
+  margin: 20px 0 8px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--accent-dark);
+}
+
+.rbr-text--support {
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+.rbr-breadcrumb {
+  margin-block-start: 16px;
+  font-size: 0.82rem;
+  color: var(--text-faint);
+}
+
+.rbr-breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.rbr-breadcrumb a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.rbr-breadcrumb__current {
+  color: var(--text-faint);
+}
+
+.rbr-breadcrumb__sep {
+  margin-inline: 6px;
+  color: var(--border);
+}
+
+/* --- Standalone search / filter field (authors.html, depts.html) ---------------- */
+
+.rbr-search {
+  max-width: 32rem;
+  margin-block: 20px;
+}
+
+.rbr-search__label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 4px;
+}
+
+.rbr-search__help {
+  margin: 4px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-faint);
+}
+
+.rbr-input,
+.rbr-select {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.rbr-input:focus,
+.rbr-select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.rbr-results {
+  margin-block-start: 20px;
+}
+
+.rbr-results__heading {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.rbr-list-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rbr-list-results li {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.rbr-list-results__item {
+  display: block;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.rbr-list-results__name {
+  display: block;
+  font-weight: 600;
+}
+
+.rbr-list-results__institution,
+.rbr-list-results__notice {
+  display: block;
+  color: var(--text-faint);
+  font-size: 0.78rem;
+}
+
+a.rbr-list-results__item:hover {
+  background: var(--nav-hover-bg);
+  color: var(--accent-dark);
+}
+
+a.rbr-list-results__item:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 7px;
+}
+
+.rbr-list-results__item--disabled {
+  color: var(--text-faint);
+  cursor: default;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoboIndexBR — Authors</title>
+    <meta name="description" content="Search for authors with publications indexed by RoboIndexBR.">
+    <link rel="canonical" href="authors.html">
+
+    <link rel="icon" href="images/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="images/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="images/site.webmanifest">
+
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="style/dashboard-theme.css">
+</head>
+
+<body>
+
+    <header class="rbr-header">
+        <div class="rbr-header__inner">
+            <a class="rbr-brand" href="index.html">RoboIndexBR <span>LASER · UFPB</span></a>
+            <nav aria-label="Main navigation">
+                <ul class="rbr-header-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="authors.html" aria-current="page">Authors</a></li>
+                    <li><a href="depts.html">Departments</a></li>
+                    <li><a href="stats.html">Statistics</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="rbr-main">
+        <div class="container-lg">
+
+            <nav class="rbr-breadcrumb" aria-label="You are here">
+                <a href="index.html">Home</a>
+                <span class="rbr-breadcrumb__sep">/</span>
+                <span class="rbr-breadcrumb__current">Authors</span>
+            </nav>
+
+            <h1 class="rbr-page-title">Authors</h1>
+            <p class="rbr-text">
+                This list gathers Brazilian authors with publications indexed by RoboIndexBR and
+                an institutional affiliation recorded in the project. Each profile has a permanent
+                URL and can be shared.
+            </p>
+
+            <div class="rbr-search">
+                <label class="rbr-search__label" for="author-search">Search by author or institution</label>
+                <input class="rbr-input" type="search" id="author-search"
+                    placeholder="Type a name or an institution"
+                    autocomplete="off">
+                <p class="rbr-search__help">The full list appears below. Search ignores accents and letter case.</p>
+            </div>
+
+            <div id="author-results" class="rbr-results" aria-live="polite"></div>
+
+        </div>
+    </main>
+
+    <footer class="rbr-footer">
+        <p>
+            RoboIndexBR — LASER, Federal University of Paraíba. Data obtained from
+            <a href="https://dblp.org" target="_blank" rel="noopener">DBLP</a>.
+        </p>
+    </footer>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/jquery.csv.js"></script>
+    <script src="js/authors.js"></script>
+</body>
+
+</html>
