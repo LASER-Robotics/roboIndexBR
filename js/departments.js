@@ -32,6 +32,14 @@
     });
   }
 
+  function escapeHTML(text) {
+    return String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
   function loadCSV(file) {
     return $.get(file).then(function (text) {
       return $.csv.toArrays(text, { onParseValue: $.csv.hooks.castToScalar })
@@ -141,14 +149,16 @@
   function buildRows(records) {
     var rows = Object.keys(records).map(function (key) {
       var record = records[key];
-      return [record.name, count(record.authors), count(record.papers)];
+      var link = '<a href="dept.html?inst=' + encodeURIComponent(record.name) + '">' +
+        escapeHTML(record.name) + '</a>';
+      return [{ html: link, order: record.name }, count(record.authors), count(record.papers)];
     });
 
     var papersIndex = 1;
     rows.sort(function (a, b) {
       return b[papersIndex + 1] - a[papersIndex + 1] ||
         b[papersIndex] - a[papersIndex] ||
-        a[0].localeCompare(b[0], 'en');
+        a[0].order.localeCompare(b[0].order, 'en');
     });
     return rows;
   }
@@ -214,13 +224,24 @@
   function setArea(area) {
     if ((area !== 'all' && !AREAS[area]) || area === currentArea) { return; }
     currentArea = area;
+    if (window.history && history.replaceState) {
+      history.replaceState(null, '',
+        window.location.pathname + (area === 'all' ? '' : '?area=' + encodeURIComponent(area)));
+    }
     render(area);
+  }
+
+  function readArea() {
+    var match = /[?&]area=([^&]*)/.exec(window.location.search);
+    var area = match ? decodeURIComponent(match[1]) : 'all';
+    return AREAS[area] ? area : 'all';
   }
 
   function init() {
     target = document.querySelector('#departments-table');
     if (!target) { return; }
 
+    currentArea = readArea();
     var select = document.querySelector('select[data-area-select]');
     if (select) {
       select.value = currentArea;

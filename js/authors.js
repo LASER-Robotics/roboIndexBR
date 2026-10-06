@@ -121,10 +121,30 @@
     results.appendChild(list);
   }
 
+  function readQuery() {
+    var match = /[?&]q=([^&]*)/.exec(window.location.search);
+    if (!match) { return ''; }
+    try {
+      return decodeURIComponent(match[1].replace(/\+/g, ' '));
+    } catch (e) {
+      return '';
+    }
+  }
+
+  /* Keeps the search in the address bar so it survives reloads and can be shared. */
+  function writeQuery(term) {
+    if (!window.history || !history.replaceState) { return; }
+    var trimmed = term.trim();
+    var url = window.location.pathname + (trimmed ? '?q=' + encodeURIComponent(trimmed) : '');
+    history.replaceState(null, '', url + window.location.hash);
+  }
+
   function init() {
     field = document.querySelector('#author-search');
     results = document.querySelector('#author-results');
     if (!field || !results) { return; }
+
+    field.value = readQuery();
 
     /* input fires on every keystroke; the debounce avoids redoing the filter and
        rebuilding the list on every character. */
@@ -132,7 +152,10 @@
     field.addEventListener('input', function () {
       clearTimeout(timer);
       var term = field.value;
-      timer = setTimeout(function () { search(term || ''); }, 150);
+      timer = setTimeout(function () {
+        search(term || '');
+        writeQuery(term || '');
+      }, 150);
     });
 
     $.when(
