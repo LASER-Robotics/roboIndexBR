@@ -37,7 +37,18 @@ The scripts in `DBLP/` form the main data pipeline:
    This reads the generated author/article data, writes profile pages to
    `authors/`, and updates `data/configs/profs/profs.csv` and
    `data/configs/profs/pages.csv`. The HTML fragments in `utils/` are its
-   templates.
+   templates. Pages are linked without the `.html` extension, which GitHub Pages
+   serves as-is.
+
+   Then generate one page per institution:
+
+   ```powershell
+   python data/scripts/DBLP/rundepts.py
+   ```
+
+   This reads the area score and faculty files, writes `departments/<slug>.html`
+   from `utils/_department_page.html` and removes pages of institutions that left
+   the data.
 
 4. Generate department summaries after the area data and profile metadata are
    up to date:

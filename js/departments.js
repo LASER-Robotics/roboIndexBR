@@ -40,6 +40,15 @@
       .replace(/"/g, '&quot;');
   }
 
+  /* Same rule as create_slug() in rundepts.py: it names the generated pages. */
+  function nameToSlug(name) {
+    return String(name).normalize('NFKD')
+      .replace(/[̀-ͯ]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
   function loadCSV(file) {
     return $.get(file).then(function (text) {
       return $.csv.toArrays(text, { onParseValue: $.csv.hooks.castToScalar })
@@ -149,7 +158,7 @@
   function buildRows(records) {
     var rows = Object.keys(records).map(function (key) {
       var record = records[key];
-      var link = '<a href="dept.html?inst=' + encodeURIComponent(record.name) + '">' +
+      var link = '<a href="departments/' + nameToSlug(record.name) + '">' +
         escapeHTML(record.name) + '</a>';
       return [{ html: link, order: record.name }, count(record.authors), count(record.papers)];
     });

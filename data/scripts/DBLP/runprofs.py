@@ -39,7 +39,7 @@ def create_slug(name):
         raise ValueError(f"Author name does not produce a valid slug: {name!r}")
     return slug
 
-# Generates the canonical profile at /authors/<slug>.html from the template fragments.
+# Generates the profile at authors/<slug>.html (served as /authors/<slug>) from the template fragments.
 def create_profile(prof_name, slug):
     canonical_slug = html.escape(slug, quote=True)
     canonical_name = "../../../authors/" + slug + '.html'
@@ -50,7 +50,7 @@ def create_profile(prof_name, slug):
     file1 = open('../utils/_faculty_profile_start.html', 'r', encoding="utf-8")
     file2 = open('../utils/_faculty_profile_end.html', 'r', encoding="utf-8")
 
-    out.write(file1.read().replace("AUTHOR_SLUG.html", canonical_slug + ".html"))
+    out.write(file1.read().replace("AUTHOR_SLUG", canonical_slug))
     out.write(line)
     out.write(file2.read())
 

@@ -444,6 +444,11 @@ a {
   overflow-x: auto;
 }
 
+/* Charts with only a few bars: do not reserve the full chart height. */
+.rbr-chart--compact {
+  min-height: 0;
+}
+
 /* --- Bar chart (SVG generated in render.js) ------------------------------- */
 
 /* --- Statistics page sections -------------------------------------- */
@@ -725,6 +730,11 @@ a {
   font-weight: 700;
   line-height: 1.2;
   color: var(--accent-dark);
+}
+
+.rbr-page-title--section {
+  margin-top: 36px;
+  font-size: 1.25rem;
 }
 
 .rbr-text--support {

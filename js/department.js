@@ -1,14 +1,18 @@
 /* ---------------------------------------------------------------------------
-   RoboIndexBR — institution detail page (dept.html?inst=<name>)
+   RoboIndexBR — institution detail page (departments/<slug>.html)
    ---------------------------------------------------------------------------
-   Shows the institution's score in each research area and its faculty,
-   from the same per-area CSVs used by departments.js.
+   Reads `corebr_inst`, defined by rundepts.py in each generated page. Shows the
+   institution's score in each research area and its faculty, from the same
+   per-area CSVs used by departments.js.
    --------------------------------------------------------------------------- */
 
-/* global RoboIndexRender */
+/* global corebr_inst, RoboIndexRender */
 
 (function () {
   'use strict';
+
+  /* Pages live in departments/, one level below the site root. */
+  var BASE = '../';
 
   var AREAS = {
     robotics: 'Robotics (general)',
@@ -77,16 +81,6 @@
     target.appendChild(box);
   }
 
-  function getInstitutionParam() {
-    var match = /[?&]inst=([^&]*)/.exec(window.location.search);
-    if (!match) { return ''; }
-    try {
-      return decodeURIComponent(match[1].replace(/\+/g, ' ')).trim();
-    } catch (e) {
-      return '';
-    }
-  }
-
   function renderScores(target, scores) {
     var rows = scores.filter(function (s) { return s[1] > 0; });
     target.textContent = '';
@@ -115,7 +109,7 @@
 
     var rows = profs.map(function (p) {
       var cell = pages[nameToFile(p.name)]
-        ? { html: '<a href="authors/' + encodeURIComponent(nameToSlug(p.name)) + '.html">' +
+        ? { html: '<a href="' + BASE + 'authors/' + encodeURIComponent(nameToSlug(p.name)) + '">' +
             escapeHTML(p.name) + '</a>', order: p.name }
         : p.name;
       return [cell, p.areas.join(', ')];
@@ -137,23 +131,17 @@
     var profsTarget = document.getElementById('dept-profs');
     if (!scoresTarget || !profsTarget) { return; }
 
-    var param = getInstitutionParam();
-    if (!param) {
-      document.getElementById('dept-name').textContent = 'Institution not specified';
-      scoresTarget.parentNode.removeChild(scoresTarget);
-      showMessage(profsTarget, 'info', 'Choose an institution',
-        'Open an institution from the Departments page.');
-      return;
-    }
+    if (typeof corebr_inst !== 'string') { return; }
+    var param = corebr_inst.trim();
 
     var wanted = key(param);
     var areas = Object.keys(AREAS);
-    var requests = [$.get('data/configs/profs/pages.csv').then(null, function () {
+    var requests = [$.get(BASE + 'data/configs/profs/pages.csv').then(null, function () {
       return $.Deferred().resolve('');
     })];
     areas.forEach(function (area) {
-      requests.push(loadCSV('data/' + area + '-out-scores.csv'));
-      requests.push(loadCSV('data/' + area + '-out-profs-list.csv'));
+      requests.push(loadCSV(BASE + 'data/' + area + '-out-scores.csv'));
+      requests.push(loadCSV(BASE + 'data/' + area + '-out-profs-list.csv'));
     });
 
     $.when.apply($, requests)
@@ -209,7 +197,7 @@
         summary.textContent =
           profs.length + (profs.length === 1 ? ' author' : ' authors') + ' indexed. ';
         var more = document.createElement('a');
-        more.href = 'authors.html?q=' + encodeURIComponent(name);
+        more.href = BASE + 'authors.html?q=' + encodeURIComponent(name);
         more.textContent = 'See in the authors list';
         summary.appendChild(more);
 

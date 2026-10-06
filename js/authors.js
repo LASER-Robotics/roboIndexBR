@@ -2,7 +2,7 @@
    RoboIndexBR — author list and search in authors.html
    ---------------------------------------------------------------------------
    Local list of authors filtered by name/institution, linking to
-   authors/<slug>.html — the individual profiles.
+   authors/<slug> — the individual profiles.
    --------------------------------------------------------------------------- */
 
 (function () {
@@ -86,7 +86,7 @@
 
       if (hasPage) {
         item = document.createElement('a');
-        item.href = 'authors/' + nameToSlug(author.name) + '.html';
+        item.href = 'authors/' + nameToSlug(author.name);
       } else {
         /* Without an individual profile, avoids offering a link that would 404. */
         item = document.createElement('span');

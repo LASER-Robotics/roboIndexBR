@@ -380,7 +380,7 @@ window.RoboIndexRender = (function () {
       /* Only links authors that have a generated profile — not every author has a page. */
       var hasPage = ctx.authorPages && ctx.authorPages[file];
       var cell = hasPage
-        ? { html: '<a href="authors/' + encodeURIComponent(nameToSlug(name)) + '.html">' + escapeHTML(name) + '</a>',
+        ? { html: '<a href="authors/' + encodeURIComponent(nameToSlug(name)) + '">' + escapeHTML(name) + '</a>',
             order: name }
         : name;
       return [cell, row[1]];
